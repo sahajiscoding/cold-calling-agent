@@ -30,9 +30,9 @@ export const coldCallingCampaigns = sqliteTable(
       .notNull()
       .default(sql`(current_timestamp)`),
   },
-  (table) => [
-    index("campaigns_status_idx").on(table.status),
-  ]
+  (table) => ({
+    campaignsStatusIdx: index("campaigns_status_idx").on(table.status),
+  })
 );
 
 // Prospects table - businesses to contact
@@ -81,12 +81,12 @@ export const coldCallingProspects = sqliteTable(
       .default(sql`(current_timestamp)`),
     lastContactedAt: text("last_contacted_at"),
   },
-  (table) => [
-    index("prospects_campaign_idx").on(table.campaignId),
-    index("prospects_status_idx").on(table.status),
-    index("prospects_phone_idx").on(table.phoneNumber),
-    index("prospects_website_idx").on(table.websiteFound),
-  ]
+  (table) => ({
+    prospectsCampaignIdx: index("prospects_campaign_idx").on(table.campaignId),
+    prospectsStatusIdx: index("prospects_status_idx").on(table.status),
+    prospectsPhoneIdx: index("prospects_phone_idx").on(table.phoneNumber),
+    prospectsWebsiteIdx: index("prospects_website_idx").on(table.websiteFound),
+  })
 );
 
 // Messages table - WhatsApp message history
@@ -126,11 +126,11 @@ export const coldCallingMessages = sqliteTable(
       .notNull()
       .default(sql`(current_timestamp)`),
   },
-  (table) => [
-    index("messages_prospect_idx").on(table.prospectId),
-    index("messages_status_idx").on(table.status),
-    index("messages_whatsapp_id_idx").on(table.whatsappMessageId),
-  ]
+  (table) => ({
+    messagesProspectIdx: index("messages_prospect_idx").on(table.prospectId),
+    messagesStatusIdx: index("messages_status_idx").on(table.status),
+    messagesWhatsappIdIdx: index("messages_whatsapp_id_idx").on(table.whatsappMessageId),
+  })
 );
 
 // Research jobs table - tracks business research tasks
@@ -156,10 +156,10 @@ export const coldCallingResearchJobs = sqliteTable(
       .default(sql`(current_timestamp)`),
     completedAt: text("completed_at"),
   },
-  (table) => [
-    index("research_jobs_campaign_idx").on(table.campaignId),
-    index("research_jobs_status_idx").on(table.status),
-  ]
+  (table) => ({
+    researchJobsCampaignIdx: index("research_jobs_campaign_idx").on(table.campaignId),
+    researchJobsStatusIdx: index("research_jobs_status_idx").on(table.status),
+  })
 );
 
 // WhatsApp templates table - stores approved Meta templates
@@ -184,12 +184,12 @@ export const coldCallingTemplates = sqliteTable(
       .notNull()
       .default(sql`(current_timestamp)`),
   },
-  (table) => [
-    unique("templates_name_language_unique").on(
+  (table) => ({
+    templatesNameLanguageUnique: unique("templates_name_language_unique").on(
       table.name,
       table.language
     ),
-  ]
+  })
 );
 
 // Automation settings table - controls agent behavior

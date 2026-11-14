@@ -1,5 +1,5 @@
 import initSqlJs, { Database as SqlJsDatabase } from "sql.js";
-import { drizzle, SqlJsRemoteDatabase } from "drizzle-orm/sql-js";
+import { drizzle } from "drizzle-orm/sql-js";
 import * as schema from "./schema";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
 import { join, dirname } from "path";
@@ -15,7 +15,7 @@ if (!existsSync(dbDir)) {
 
 // Load or create database
 let SQL: any;
-let db: SqlJsRemoteDatabase<typeof schema>;
+let db: any;
 
 // Initialize sql.js and create Drizzle instance
 export async function initializeDatabase() {

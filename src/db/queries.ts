@@ -3,7 +3,6 @@ import { initializeDatabase } from "./index";
 import { db } from "./index";
 import * as schema from "./schema";
 import { logger } from "../logger";
-import { logger } from "../logger";
 
 export interface Campaign {
   id: string;
@@ -369,7 +368,7 @@ export async function getStats(): Promise<{
   const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  const contactedToday = messages.filter((m) => {
+  const contactedToday = messages.filter((m: any) => {
     if (m.sentAt) {
       const sentDate = new Date(m.sentAt);
       sentDate.setHours(0, 0, 0, 0);
@@ -379,7 +378,7 @@ export async function getStats(): Promise<{
   }).length;
 
   const interestedProspects = prospects.filter(
-    (p) => p.status === "interested"
+    (p: any) => p.status === "interested"
   ).length;
 
   return {

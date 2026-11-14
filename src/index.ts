@@ -343,7 +343,7 @@ async function processIncomingMessage(
       messageType: messageType as any,
       content,
       whatsappMessageId: messageId,
-      status: "received",
+      status: "sent",
     });
 
     // Get conversation history

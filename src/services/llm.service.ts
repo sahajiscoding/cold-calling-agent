@@ -131,7 +131,7 @@ Analyze this message and respond in JSON format with:
     analysis: MessageAnalysis
   ): Promise<string> {
     if (!this.apiKey) {
-      return this.getMockResponse(context, analysis);
+      return this.getTemplateResponse(context, analysis);
     }
 
     try {
